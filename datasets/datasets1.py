@@ -27,16 +27,24 @@ tfds.as_dataframe(dataset['train'].take(4), info)
 
 print('\n__________________________________________________')
 
-builder = tfds.builder('blimp')
+builder = tfds.builder('imdb_reviews')
 builder.download_and_prepare()
-ds = builder.as_dataset(split='train', shuffle_files=True)
-print(ds)
 
 
-builder = tfds.builder('blimp')
-#builder.download_and_prepare()
-ds = builder.as_dataset(split='train', shuffle_files=True)
-print(type(ds))
-print(ds)
+datasets, info = tfds.load('imdb_reviews', with_info=True, as_supervised=True)
 
-##print(ds['UID'], info) ????????????
+train_dataset = datasets['train']
+train_dataset = train_dataset.batch(5).shuffle(50).take(2)
+
+for data in train_dataset:
+    print(data)
+
+print('\n__________________________________________________')
+
+dataset, info = tfds.load("blimp", with_info=True)
+print(dataset)
+print(info)
+print(dataset['train'])
+#print(type(dataset['train']))
+
+tfds.as_dataframe(dataset['train'].take(4), info)
