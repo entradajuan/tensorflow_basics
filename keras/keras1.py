@@ -44,3 +44,19 @@ score = model.fit(X_train, y_train, epochs= EPOCHS, batch_size = BATCH_SIZE, val
 score = model.evaluate(X_test, y_test, batch_size=BATCH_SIZE)
 print("\nTest score:", score[0])
 print('Test accuracy:', score[1])
+
+## PREDICTIONS!!!
+print(type(X_train))
+print(X_train.shape)
+
+ej1 = X_train[:1]
+print(ej1)
+print(type(ej1))
+print(ej1.shape)
+
+print('\n\n')
+res = model.predict(ej1)
+print(res)
+print(type(res))
+
+print(model.predict_classes(ej1))
