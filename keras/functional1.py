@@ -30,12 +30,12 @@ print(tf.keras.utils.plot_model(model, 'my_first_model_with_shape_info.png', sho
 
 ## TRAINING 
 
-(x_train, y_train), (x_test, y_test) = keras.datasets.mnist.load_data()
+(x_train, y_train), (x_test, y_test) = tf.keras.datasets.mnist.load_data()
 x_train = x_train.reshape(60000, 784).astype('float32') / 255
 x_test = x_test.reshape(10000, 784).astype('float32') / 255
 
 model.compile(loss='sparse_categorical_crossentropy',
-              optimizer=keras.optimizers.RMSprop(),
+              optimizer=tf.keras.optimizers.RMSprop(),
               metrics=['accuracy'])
 history = model.fit(x_train, y_train,
                     batch_size=64,
