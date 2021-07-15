@@ -14,3 +14,15 @@ print(type(df))
 print(df.head())
 print(df.isna().sum())
 print(df.describe())
+
+# To numpy or Series and PREPROCESSING and off to feed the model to be trained
+text = df['review']
+label = df['sentiment']
+
+print(text)
+print(type(text))
+
+## PANDAS SERIES VS NUMPY ARRAY?
+## WHY DO WE NEED TENSORFLOW???
+
+
