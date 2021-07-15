@@ -19,3 +19,7 @@ x = tf.keras.layers.Dense(64, activation='relu')(x)
 outputs = tf.keras.layers.Dense(10, activation='softmax')(x)
 
 print(outputs)
+
+model = keras.Model(inputs=inputs, outputs=outputs)
+
+model.summary()
