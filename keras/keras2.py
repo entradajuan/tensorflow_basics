@@ -11,7 +11,7 @@ import numpy as np
 data = pd.read_csv('importing/spam.csv', encoding = "ISO-8859-1")
 data = data[['v1','v2']] 
 
-#conver = lambda s : int(s=='ham') 
+conver = lambda s : int(s=='ham') 
 
 data['v1'] = data['v1'].apply(conver)
 #print(data[['v1','v2']].head())
