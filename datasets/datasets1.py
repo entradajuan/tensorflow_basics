@@ -1,6 +1,8 @@
 import tensorflow as tf
 import tensorflow_datasets as tfds
 
+print('\n 1__________________________________________________')
+
 # See all registered datasets
 builders = tfds.list_builders()
 print (builders)
@@ -11,7 +13,7 @@ train_data, test_data = data['train'], data['test']
 
 print(info)
 
-print('\n__________________________________________________')
+print('\n 2__________________________________________________')
 
 #print(len(builders))
 #for data in builders:
@@ -23,9 +25,12 @@ print(info)
 print(dataset['train'])
 print(type(dataset['train']))
 
-tfds.as_dataframe(dataset['train'].take(4), info)
+df1 = tfds.as_dataframe(dataset['train'].take(4), info)
+print(df1)
+print(type(df1))
 
-print('\n__________________________________________________')
+
+print('\n 3__________________________________________________')
 
 builder = tfds.builder('imdb_reviews')
 builder.download_and_prepare()
@@ -39,7 +44,7 @@ train_dataset = train_dataset.batch(5).shuffle(50).take(2)
 for data in train_dataset:
     print(data)
 
-print('\n__________________________________________________')
+print('\n 4__________________________________________________')
 
 dataset, info = tfds.load("blimp", with_info=True)
 print(dataset)
