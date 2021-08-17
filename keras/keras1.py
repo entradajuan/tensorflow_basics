@@ -30,22 +30,27 @@ def build_model():
 
 ## INICIO _____________________________________
 
+# 1 GET DATA
+# 2 PREPROCESS
 (X_train, y_train), (X_test, y_test) = load_data()
 print(X_train[0])
 print(y_train[0])
 
+# 3 BUILT MODEL
 model=build_model()
 model.summary()
 
 model.compile(optimizer = "adam", loss = "binary_crossentropy",metrics = ["accuracy"])
 
+# 4 TRAIN IT
 score = model.fit(X_train, y_train, epochs= EPOCHS, batch_size = BATCH_SIZE, validation_data = (X_test, y_test))
 
+# 5 EVALUATE IT
 score = model.evaluate(X_test, y_test, batch_size=BATCH_SIZE)
 print("\nTest score:", score[0])
 print('Test accuracy:', score[1])
 
-## PREDICTIONS!!!
+## 6 USE THE CHOSEN ONE
 print(type(X_train))
 print(X_train.shape)
 
