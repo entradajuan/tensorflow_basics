@@ -1,4 +1,5 @@
 import tensorflow as tf
+import pandas as pd
 
 from google.colab import drive
 drive.mount('/content/drive')
@@ -30,7 +31,6 @@ def setupGPU():
 
 
 def load_data():
-  
   DATASET_PATH = '/content/drive/My Drive/Machine Learning/datos/BERT_sentiment_IMDB_Dataset.csv'
   data = pd.read_csv(DATASET_PATH)
 
@@ -40,7 +40,10 @@ def load_data():
 setupGPU()
 
 # 1 .- LOAD DATA
-#data = load_data()
+data = load_data()
+#print(data)
+#print(data.describe())
+print(data.sentiment.describe())
 
 # 2 .- PREPROCESS DATA
 
