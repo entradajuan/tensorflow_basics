@@ -58,13 +58,21 @@ def get_tokenizer(data):
   tokenizer.fit_on_texts(data)
   return tokenizer
 
-tokenizer = get_tokenizer(data['review'])
-sentences = tokenizer.texts_to_sequences(train_senteces)
 MAX_LEN = 200
-sentences = tf.keras.preprocessing.sequence.pad_sequences(sentences, maxlen=MAX_LEN)
 
+def process_data1(train_senteces):
+  tokenizer = get_tokenizer(data['review'])
+  sentences = tokenizer.texts_to_sequences(train_senteces)
+  sentences = tf.keras.preprocessing.sequence.pad_sequences(sentences, maxlen=MAX_LEN)
+  return sentences
 
+def process_data1(train_senteces):
+  
 
+  return sentences
+
+sentences = process_data1(train_senteces)
+sentences = process_data2(train_senteces)
 
 #_______________________________________________________________________________
 # 3 .- BUILD MODEL
