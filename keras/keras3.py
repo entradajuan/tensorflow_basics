@@ -29,7 +29,6 @@ def setupGPU():
     ###############################################
 
 
-
 def load_data():
   DATASET_PATH = '/content/drive/My Drive/Machine Learning/datos/BERT_sentiment_IMDB_Dataset.csv'
   data = pd.read_csv(DATASET_PATH)
@@ -40,12 +39,28 @@ def load_data():
 setupGPU()
 
 # 1 .- LOAD DATA
+
 data = load_data()
-#print(data)
+print(data)
 #print(data.describe())
-print(data.sentiment.describe())
+#print(data.sentiment.describe())
 
 # 2 .- PREPROCESS DATA
+training_data = data.sample(frac=0.8, random_state=25)
+testing_data = data.drop(training_data.index)
 
+train_senteces = training_data['review']
+train_labels =  training_data['sentiment']
+
+# Tokenizer 
+def get_tokenizer(data):
+  tokenizer = tf.keras.preprocessing.text.Tokenizer()
+  tokenizer.fit_on_texts(data)
+
+  return tokenizer
+
+tokenizer = get_tokenizer(data['review'])
+
+sentences = tokenizer.texts_to_sequences(train_senteces)
 
 
