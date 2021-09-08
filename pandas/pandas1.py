@@ -3,6 +3,7 @@ import pandas as pandas
 
 data, info = tfds.load("wine_quality", with_info=True)
 df = tfds.as_dataframe(data['train'])
+print(df.dtypes)
 print(info)
 print(df.columns)
 
@@ -36,3 +37,17 @@ df3 = df.query("quality == 9")[['features/alcohol']]
 print(type(df3))
 print(df3.shape)
 print(df3.describe())
+
+#__________________________________________________
+
+df3 = df.isna().sum()
+print(df3)
+
+df4 = df.isnull().sum()
+print(df4)
+
+#__________________________________________________
+
+
+
+
