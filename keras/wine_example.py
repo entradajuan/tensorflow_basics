@@ -14,6 +14,15 @@ print(df_train.shape, ' --  ', df_test.shape)
 features_train = df_train.iloc[:, :11]
 label_train = df_train.iloc[:, 11:] - 3
 
+features_train.columns = ['alcohol', 'chlorides', 'citric_acid',
+       'density', 'fixed_acidity',
+       'freesulfurdioxide', 'pH',
+       'resi_sugar', 'sulphates',
+       'sulf_dioxide', 'vol_acidity']
+
+features_train = features_train[['alcohol', 'fixed_acidity', 'citric_acid', 'pH', 'vol_acidity'] ]
+features_train
+
 print(features_train.shape)
 print(features_train.dtypes)
 print(features_train.isna().sum())
@@ -28,29 +37,45 @@ print(features_test.isna().sum())
 print(label_train.describe())
 label_train.hist()
 
+from sklearn.preprocessing import MinMaxScaler
+mms = MinMaxScaler()
+features_train_norm = mms.fit_transform(features_train)
+
 NUM_CLASSES = 7
 label_train = tf.keras.utils.to_categorical(label_train, NUM_CLASSES)
 label_test = tf.keras.utils.to_categorical(label_test, NUM_CLASSES)
 
-BATCH_SIZE = 1000
+BATCH_SIZE = 500
 NUM_INPUTS = features_train.shape[1]
-EPOCHS = 250
+EPOCHS = 5000
 N_HIDDEN1 = 250
 N_HIDDEN2 = 4500
 VALIDATION_SPLIT=0.1 
 DROPOUT = 0.4
 
 model = tf.keras.models.Sequential()
-model.add(tf.keras.layers.Dense(N_HIDDEN2, input_shape=(NUM_INPUTS,), name='dense_layer', activation='relu'))
+model.add(tf.keras.layers.Dense(N_HIDDEN1, input_shape=(NUM_INPUTS,), name='dense_layer', activation='relu'))
 model.add(tf.keras.layers.Dropout(DROPOUT))
-model.add(tf.keras.layers.Dense(N_HIDDEN1,  name='dense_layer2', activation='relu'))
+model.add(tf.keras.layers.Dense(N_HIDDEN2,  activation='relu'))
+model.add(tf.keras.layers.Dropout(DROPOUT))
+model.add(tf.keras.layers.Dense(N_HIDDEN1,  activation='relu'))
+model.add(tf.keras.layers.Dropout(DROPOUT))
+model.add(tf.keras.layers.Dense(N_HIDDEN2,  activation='relu'))
+model.add(tf.keras.layers.Dropout(DROPOUT))
+model.add(tf.keras.layers.Dense(N_HIDDEN1,  activation='relu'))
+model.add(tf.keras.layers.Dropout(DROPOUT))
+model.add(tf.keras.layers.Dense(N_HIDDEN2,  activation='relu'))
 model.add(tf.keras.layers.Dropout(DROPOUT))
 model.add(tf.keras.layers.Dense(NUM_CLASSES, activation='softmax'))
 
 model.summary()
 model.compile(optimizer='Adam', loss='categorical_crossentropy', metrics=['accuracy'])
 
-model.fit(features_train, label_train, batch_size=BATCH_SIZE, epochs=EPOCHS, verbose=True, validation_split=VALIDATION_SPLIT)
+model.fit(features_train_norm, label_train, batch_size=BATCH_SIZE, epochs=EPOCHS, verbose=True, validation_split=VALIDATION_SPLIT)
 
-test_loss, test_acc  = model.evaluate(features_test, label_test)
+mms = MinMaxScaler()
+features_test_norm = mms.fit_transform(features_test)
+
+test_loss, test_acc  = model.evaluate(features_test_norm, label_test)
 print(test_loss, '  -  ', test_acc)
+
