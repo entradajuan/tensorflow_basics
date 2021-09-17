@@ -40,6 +40,12 @@ texts = ([['green', 'M', 10.1, 'class1'],
                    ['blue', 'XL', 15.3, 'class1'],
                    ])
 
+arr = np.array(texts)
+print(arr)
+print(arr.shape)
 
+colors = {color:i for i, color in enumerate(arr[:, 0])}
+print(colors)
+arr[:, 0] = [colors.get(c) for c in arr[:, 0]]
 
-arr
+print(arr)
