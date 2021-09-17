@@ -17,6 +17,10 @@ list2 = [strip(w) for w in list2]
 print(list2)
 
 first = lambda w : w[:1]
-list2 = 
+list2 = map(first, list2)
+print(type(list2))
+for e in list2:
+  print(e)
+  
 
 
