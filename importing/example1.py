@@ -22,7 +22,19 @@ label = df['sentiment']
 print(text)
 print(type(text))
 
-## PANDAS SERIES VS NUMPY ARRAY?
-## WHY DO WE NEED TENSORFLOW???
 
 
+
+#______________________________________________
+
+file_path = 'importing/en.raw'
+
+with open(file_path) as f:
+    lines = f.readlines()
+
+print(lines)
+print(type(lines))
+
+arr = np.array(lines)
+print(type(arr))
+print(arr)
