@@ -8,7 +8,7 @@ dim_embedding = 256
 EPOCHS = 20
 BATCH_SIZE =500
 
-## FUNCIONES _____________________________________
+## FUNCIONES ___________________________________
 
 def load_data():
   # keras datasets
